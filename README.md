@@ -1,2 +1,4 @@
 # prevalence_mtc
-- Cuan prevalente es la "Multifocalidad y bilateralidad" en pacientes con Cancer medular esporadico (n > 30 articles) - Analisis por regiones America, Asia, Europa y Otros - Metanalisis Cancer Medular especifico, intervencion seria multifocalidad y control seria unifocalidad, el outcome seria mortalidad, biochemical recurrence, metastasis.
+¿Cuán prevalente es la "Multifocalidad y bilateralidad" en pacientes con cáncer medular esporádico (n > 30 artículos)? 
+- Analisis por regiones America, Asia, Europa y Otros -
+Metanálisis: Cáncer medular específico multifocalidad vs unifocalidad respecto a mortalidad, recurrencia bioquímica, metástasis.

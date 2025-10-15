@@ -1,0 +1,568 @@
+---
+title: "ASSESSMENT OF PREVALENCE AND FOCALITY OF CANCER MEDULAR THYROID"
+author: "Luis A. Figueroa, Eddy Lincango, et. al."
+date: "2025-10-13"
+knit: (function(inputFile, encoding) { rmarkdown::render(inputFile, encoding = encoding, output_file = paste0(dirname(inputFile),'/README.md')) })
+output: github_document
+---
+<i> Analysis and visualization developed by Luis A. Figueroa, Eddy Lincango, et. al.</i>
+
+The purpose of this site is to make our meta-analysis as transparent as possible. All information or documents used, from the protocol to the final publication, will be available here. If further information is needed, please do not hesitate to contact us.
+
+For this analysis we use R language [version 4.4.2](https://cran.r-project.org/bin/windows/base/old/4.4.2/) in R studio [server](https://posit.co/download/rstudio-server/) to compute the following results.
+
+```{r setup, include=FALSE}
+library(conflicted)
+library(tidyverse)
+library(metafor)
+library(rmarkdown)
+library(forestplot)
+library(openxlsx)
+library(gt)
+knitr::opts_chunk$set(fig.path = "Figures/", dev='svg')
+```
+
+```{r functions_rr, echo=FALSE, message=FALSE, warning=FALSE}
+create_region_tb <- function(americ_prev, am_prev) {
+  r1 = c("Location", "Author", "Bilaterality n/N (%)*", "Multifocality general n/N (%)*") 
+  r2 = c(am_prev[2], rep(' ', 3))
+  r3 = c()
+  for(i in 1:nrow(americ_prev)){
+    b1 <- c(americ_prev$country[i], americ_prev$author[i], 
+            paste0(americ_prev$e_bi[i], "/", americ_prev$n_bi[i],
+                   " (", americ_prev$prev_bi[i], ")"),
+            paste0(americ_prev$e_mf[i], "/", americ_prev$n_mf[i], 
+                   " (", americ_prev$prev_mf[i], ")"))
+    r3 = rbind(r3,b1)
+  }
+  r4 = c("Statisticals by region: ", ' ', paste0(am_prev[7], "/", am_prev[5],
+                   " (", as.numeric(am_prev[3])*100, ")"), paste0(am_prev[8], "/", am_prev[6],
+                                                  " (", as.numeric(am_prev[4])*100, ")"))
+  df = rbind(r2,r3,r4)
+  df = data.frame(df)
+  names(df) = r1
+  
+  return(df)
+}
+
+
+or <- function(database){
+  db <- database
+  db <- escalc(measure="OR", ai=e1, ci=e2, n1i=n1, n2i=n2,data=database)
+  db <- db[order(db$yi),]
+  db <- summary(db)
+  
+  db$est <-  exp(db$yi)
+  db$ci.lb <- exp(db$ci.lb)
+  db$ci.ub <- exp(db$ci.ub)
+  
+  
+  db$rate1 <- paste(db$e1,"/",db$n1)
+  db$rate2 <- paste(db$e2,"/",db$n2)
+  db$or <- paste(formatC(db$est, format='f', digits =2)," ",
+                 "(",formatC(db$ci.lb, format='f', digits =2),
+                 "-",formatC(db$ci.ub, format='f', digits=2),")")  
+  
+  ma <- rma(db$yi, db$vi, measure='OR', data=db, method='REML')
+  exp <- predict(ma, transf = transf.exp.int)
+  
+  db$weights <- weights(ma)
+  db$w <- paste(formatC(db$weights, format='f', digits = 1),'%')
+  
+  
+  list(pre = db, ma = ma, exp = exp)
+}
+
+
+table_or <- function(analysis, int, comp, outcome, nstudies){
+  ifelse(nstudies>0,
+  b <- cbind( 
+    c("Author", analysis$pre$author, 
+      paste("Overall Odds Ratio for", analysis$ma$k, "studies"),
+      paste("(Tau^2 = ", (formatC(analysis$ma$tau2, digits=2, format="f")), ", df = ", 
+            (analysis$ma$k - analysis$ma$p),
+            ", p ", (ifelse(analysis$ma$QEp < 0.001, 
+                            paste("< 0.001"),
+                            paste("= ", formatC(analysis$ma$QEp, digits=3, format="f")))),
+            "; ", "I^2", " = ", (formatC(analysis$ma$I2, digits=1, format="f")), "%)")),
+    c(paste(int, '\n', outcome,'/','total n'),
+      analysis$pre$rate1, paste(sum(analysis$pre$e1), " / ", sum(analysis$pre$n1)), NA),
+    c(paste(comp, '\n', outcome,'/', 'total n'),
+      analysis$pre$rate2, paste(sum(analysis$pre$e2), " / ", sum(analysis$pre$n2)), NA),
+    c("Odds Ratio (95% CI)", analysis$pre$or, 
+      paste(formatC(analysis$exp$pred, format='f', digits =2), 
+            " (",formatC(analysis$exp$ci.lb, format='f', digits=2),
+            "-", formatC(analysis$exp$ci.ub, format='f', digits=2), ")"), NA),
+    c("Weight(%)", paste(formatC(weights(analysis$ma), format='f', digits = 1),'%'), NA, NA)),
+       b <- cbind( 
+        c("Author", analysis$pre$author),
+        c(paste(int, '\n', outcome,'/','total n'),analysis$pre$rate1),
+        c(paste(comp, '\n', outcome,'/', 'total n'),analysis$pre$rate2),
+        c("Odds Ratio (95% CI)", analysis$pre$or)))
+  
+  b <- as_tibble(b, .name_repair = "unique")
+  b <- b %>% add_row(.before = 2)
+  b <- b %>% add_row(.before = 2)
+  b <- b %>% add_row(.after = nrow(b))  
+  
+  ifelse(nstudies> 0, b <- b %>% add_row(.before = nrow(b)-2), NA)
+
+  
+  ifelse(nstudies > 0,
+        (c <- structure(list(
+          mean = c(rep(NA, 3), analysis$pre$est, NA, analysis$exp$pred,NA, NA),
+          lower = c(rep(NA, 3), analysis$pre$ci.lb, NA, analysis$exp$ci.lb, NA, NA),
+          upper = c(rep(NA, 3), analysis$pre$ci.ub, NA, analysis$exp$ci.ub, NA, NA)),
+          .Names = c("mean", "lower", "upper"),
+          row.names = c(NA, -1L*nrow(b)),
+          class = "data.frame")),
+        (c <- structure(list(
+          mean = c(rep(NA, 3), analysis$pre$est, NA, NA),
+          lower = c(rep(NA, 3), analysis$pre$ci.lb, NA, NA),
+          upper = c(rep(NA, 3), analysis$pre$ci.ub, NA, NA)),
+          .Names = c("mean", "lower", "upper"),
+          row.names = c(NA, -1L*nrow(b)),
+          class = "data.frame")))
+
+  c <- as_tibble(c)
+  
+  list(b = b, c = c)
+} 
+  
+
+rr <- function(database){
+  db <- database
+  db <- escalc(measure="RR", ai=e1, ci=e2, n1i=n1, n2i=n2,data=database)
+  db <- db[order(db$yi),]
+  db <- summary(db)
+  
+  db$est <-  exp(db$yi)
+  db$ci.lb <- exp(db$ci.lb)
+  db$ci.ub <- exp(db$ci.ub)
+  
+  
+  db$rate1 <- paste(db$e1,"/",db$n1)
+  db$rate2 <- paste(db$e2,"/",db$n2)
+  db$or <- paste(formatC(db$est, format='f', digits =2)," ",
+                 "(",formatC(db$ci.lb, format='f', digits =2),
+                 "-",formatC(db$ci.ub, format='f', digits=2),")")  
+  
+  ma <- rma(db$yi, db$vi, measure='RR', data=db, method='REML')
+  exp <- predict(ma, transf = transf.exp.int)
+  
+  db$weights <- weights(ma)
+  db$w <- paste(formatC(db$weights, format='f', digits = 1),'%')
+  
+  
+  list(pre = db, ma = ma, exp = exp)
+}
+
+
+table_rr <- function(analysis, int, comp, outcome, nstudies){
+  ifelse(nstudies>0,
+  b <- cbind( 
+    c("Author", analysis$pre$author, 
+      paste("Overall Odds Ratio for", analysis$ma$k, "studies"),
+      paste("(Tau^2 = ", (formatC(analysis$ma$tau2, digits=2, format="f")), ", df = ", 
+            (analysis$ma$k - analysis$ma$p),
+            ", p ", (ifelse(analysis$ma$QEp < 0.001, 
+                            paste("< 0.001"),
+                            paste("= ", formatC(analysis$ma$QEp, digits=3, format="f")))),
+            "; ", "I^2", " = ", (formatC(analysis$ma$I2, digits=1, format="f")), "%)")),
+    c(paste(int, '\n', outcome,'/','total n'),
+      analysis$pre$rate1, paste(sum(analysis$pre$e1), " / ", sum(analysis$pre$n1)), NA),
+    c(paste(comp, '\n', outcome,'/', 'total n'),
+      analysis$pre$rate2, paste(sum(analysis$pre$e2), " / ", sum(analysis$pre$n2)), NA),
+    c("Odds Ratio (95% CI)", analysis$pre$or, 
+      paste(formatC(analysis$exp$pred, format='f', digits =2), 
+            " (",formatC(analysis$exp$ci.lb, format='f', digits=2),
+            "-", formatC(analysis$exp$ci.ub, format='f', digits=2), ")"), NA),
+    c("Weight(%)", paste(formatC(weights(analysis$ma), format='f', digits = 1),'%'), NA, NA)),
+       b <- cbind( 
+        c("Author", analysis$pre$author),
+        c(paste(int, '\n', outcome,'/','total n'),analysis$pre$rate1),
+        c(paste(comp, '\n', outcome,'/', 'total n'),analysis$pre$rate2),
+        c("Odds Ratio (95% CI)", analysis$pre$or)))
+  
+  b <- as_tibble(b, .name_repair = "unique")
+  b <- b %>% add_row(.before = 2)
+  b <- b %>% add_row(.before = 2)
+  b <- b %>% add_row(.after = nrow(b))  
+  
+  ifelse(nstudies> 0, b <- b %>% add_row(.before = nrow(b)-2), NA)
+
+  
+  ifelse(nstudies > 0,
+        (c <- structure(list(
+          mean = c(rep(NA, 3), analysis$pre$est, NA, analysis$exp$pred,NA, NA),
+          lower = c(rep(NA, 3), analysis$pre$ci.lb, NA, analysis$exp$ci.lb, NA, NA),
+          upper = c(rep(NA, 3), analysis$pre$ci.ub, NA, analysis$exp$ci.ub, NA, NA)),
+          .Names = c("mean", "lower", "upper"),
+          row.names = c(NA, -1L*nrow(b)),
+          class = "data.frame")),
+        (c <- structure(list(
+          mean = c(rep(NA, 3), analysis$pre$est, NA, NA),
+          lower = c(rep(NA, 3), analysis$pre$ci.lb, NA, NA),
+          upper = c(rep(NA, 3), analysis$pre$ci.ub, NA, NA)),
+          .Names = c("mean", "lower", "upper"),
+          row.names = c(NA, -1L*nrow(b)),
+          class = "data.frame")))
+
+  c <- as_tibble(c)
+  
+  list(b = b, c = c)
+} 
+
+
+plot_dicho <- function(format_table_graph, sizes_box, subtotal1_summary, limits, 
+                       xticks, xlog = TRUE, limit_x, grids, cont=FALSE){
+  mitad <- ifelse(cont == FALSE, 1, 0)
+  pos <- ifelse(cont == FALSE, 4, 6)
+  ali <- ifelse(cont == FALSE, (rep('c', 2)), (rep('c', 4)))
+  plotito <- forestplot(format_table_graph,
+             graph.pos = pos,
+             zero = mitad,
+             limits,
+             new_page = TRUE,
+             colgap = unit(5, "mm"),
+             hrzl_lines = list("2" = gpar (lwd=1, columns=1:6, col="black")),
+             lineheight=unit(0.7,'cm'),
+             boxsize = sizes_box,
+             line.margin = 2,
+             is.summary = subtotal1_summary,
+             align = c('l', ali, 'l', 'l'),
+             ci.vertices = TRUE,
+             txt_gp = fpTxtGp(label =gpar (cex=0.9),
+                              ticks = gpar(cex = 0.9, fontface="bold"),
+                              summary = gpar(cex = 0.9),
+                              xlab = gpar(cex=0.9)),
+             xticks = xticks,
+             xlog=xlog,
+             clip = limit_x,
+             grid = grids,
+             lwd.xaxis = 1,
+             lwd.ci = 2.2,
+             lwd.zero = 2,
+             graphwidth = unit(10,"cm"),
+             col=fpColors(box="black",line="grey", zero = 'dodgerblue4', axes="grey20", summary="black"))
+  
+  return(plotito)
+}
+  
+   
+```
+
+ 
+```{r cleaning, echo=FALSE, message=FALSE, warning=FALSE}
+db_prev <- read.xlsx("./Copy of Multifocality_sMTC_V4.xlsx", sheet = 3)
+#####Explore it
+
+db_prev1 <- db_prev
+# head(db_prev1)
+# names(db_prev1)
+
+## Unification colnames
+names_base <- c('id', 'author', 'n', 'outcome', 'e', 'country')
+names(db_prev1) <- names_base
+# summary(db_prev1)
+db_prev1 <- db_prev1[,-1] #id is empty
+# summary(as.factor(db_prev1$author))
+# summary(as.factor(db_prev1$outcome))
+
+## Standardize Outcomes
+db_prev1$outcome[db_prev1$outcome=="Multifocallity general"] <- "Multifocality general"
+db_prev1$outcome[db_prev1$outcome=="Multifocality general"] <- "mf"
+db_prev1$outcome[db_prev1$outcome=="Bilaterality"] <- "bi"
+
+
+## Add prevalence col
+db_prev1$prev <- round((db_prev1$e/db_prev1$n)*100,2)
+
+
+## "Pivot" cols to rows or 
+db_prev1 <- db_prev1 %>%
+  pivot_wider(
+    names_from = outcome, 
+    values_from = c(prev, n, e),
+    names_sep = "_"
+  )
+
+## Group by regions AND outcome 
+conflicted::conflicts_prefer(dplyr::filter) #muchos packs con el mismo name function
+
+americ_prev <- filter(db_prev1, country %in% c('BRAZIL','USA')) #AMERICA
+
+asia_prev <- filter(db_prev1, country %in% c('CHINA','INDIA', 'ISRAEL', 'KOREA')) #ASIA
+
+euro_prev <- filter(db_prev1, country %in% c('ATHENS','AUSTRIA', 'BELGIUM', 'FRANCE',
+                                         'GERMANY', 'GERMANY', 'ITALY', 'PORTUGAL',
+                                         'SERBIA', 'SWEDEN')) #EUROPA 
+
+others_prev <- filter(db_prev1, country %in% c('AUSTRALIA','MULTICENTER')) #OTHERS 
+
+
+
+
+#### METAANALYSIS
+db_ma <- read.xlsx("./Copy of Multifocality_sMTC_V4.xlsx", sheet = 4)
+db_ma1 <- db_ma[,-c(1,14)]
+names(db_ma1) <- c("author", "int", "comp", "outc", "follow", "n1", "n2", "e1",
+                   "e2", "es", "lw_es", "up_es")
+db_ma1$follow <- ifelse(db_ma1$follow == "> 5 years", "> 5 years", "≤ 5 years")
+db_ma1 <- db_ma1 %>% 
+  mutate(author = paste0("    ", author))
+
+db_bc <- filter(db_ma1, outc == 'Biochemical cure')
+
+db_dm <- filter(db_ma1, outc == 'Distant metastasis')
+db_dmu5 <- filter(db_dm, follow == "> 5 years")
+db_dml5 <- filter(db_dm, follow != "> 5 years")
+
+db_mt <- filter(db_ma1, outc == 'Mortality') 
+
+db_sr <- filter(db_ma1, outc == 'Structural recurrence')
+db_sru5 <- filter(db_sr, follow == "> 5 years")
+db_srl5 <- filter(db_sr, follow != "> 5 years")
+
+```
+
+**Prevalence analyisis by region**
+We conducted prevalence analyses using the `stats` package in R. Prevalence rates were calculated for all studies included in our systematic review. Regional distributions across world regions (Americas, Asia, Europe, and others) were assessed using Chi-squared tests for given probabilities (chisq.test) without correction.
+
+We formulated null and alternative hypotheses regarding the expected distribution of prevalence rates. We calculate Chi-squeared test in its p-value using `chisq.test`. The Chi-squared test results led to rejection of the null hypothesis in favor of the alternative hypothesis, indicating that observed prevalence distributions differed significantly from expected patterns for both bifocality (10.39% [95% CI: -54.07 to 74.84; p < 0.01]) and multifocal medullary thyroid cancer (18.4% [95% CI: -67.39 to 104.18; p < 0.01]).
+
+```{r analysis prev, echo=FALSE, fig.height=8.6, fig.width=17.1, message=FALSE, warning=FALSE}
+## Prevalence + IC 95% 
+prev_am_bi <- round(sum(americ_prev$e_bi, na.rm = T)/sum(americ_prev$n_bi, na.rm = T),2)
+prev_am_mf <- round(sum(americ_prev$e_mf, na.rm = T)/sum(americ_prev$n_mf, na.rm = T),2)
+am_prev <- c(NA, "AMERICA", prev_am_bi, prev_am_mf, sum(americ_prev$n_bi, na.rm = T),
+           sum(americ_prev$n_mf, na.rm = T), sum(americ_prev$e_bi, na.rm = T), 
+           sum(americ_prev$e_mf, na.rm = T))
+# americ_prev <- rbind(americ_prev, am_prev) #opcional
+
+
+prev_as_bi <- round(sum(asia_prev$e_bi, na.rm = T)/sum(asia_prev$n_bi, na.rm = T),2)
+prev_as_mf <- round(sum(asia_prev$e_mf, na.rm = T)/sum(asia_prev$n_mf, na.rm = T),2)
+as_prev <- c(NA, "ASIA", prev_as_bi, prev_as_mf, sum(asia_prev$n_bi, na.rm = T),
+           sum(asia_prev$n_mf, na.rm = T), sum(asia_prev$e_bi, na.rm = T), 
+           sum(asia_prev$e_mf, na.rm = T))
+# asia_prev <- rbind(asia_prev, as_prev)
+
+
+prev_eu_bi <- round(sum(euro_prev$e_bi, na.rm = T)/sum(euro_prev$n_bi, na.rm = T),2)
+prev_eu_mf <- round(sum(euro_prev$e_mf, na.rm = T)/sum(euro_prev$n_mf, na.rm = T),2)
+eu_prev <- c(NA, "EUROPE", prev_eu_bi, prev_eu_mf, sum(euro_prev$n_bi, na.rm = T),
+           sum(euro_prev$n_mf, na.rm = T), sum(euro_prev$e_bi, na.rm = T), 
+           sum(euro_prev$e_mf, na.rm = T))
+# euro_prev <- rbind(euro_prev, eu_prev)
+
+
+prev_ot_bi <- round(sum(others_prev$e_bi, na.rm = T)/sum(others_prev$n_bi, na.rm = T),2)
+prev_ot_mf <- round(sum(others_prev$e_mf, na.rm = T)/sum(others_prev$n_mf, na.rm = T),2)
+ot_prev <- c(NA, "ANOTHER", prev_ot_bi, prev_ot_mf, sum(others_prev$n_bi, na.rm = T),
+           sum(others_prev$n_mf, na.rm = T), sum(others_prev$e_bi, na.rm = T), 
+           sum(others_prev$e_mf, na.rm = T))
+# others_prev <- rbind(others_prev, ot_prev)
+
+
+## Chi-square + p-value to independence by region
+## Analysis prevalence by region - prepare data
+prev_regions <- rbind(am_prev, as_prev, eu_prev, ot_prev)
+prev_regions <- data.frame(prev_regions)
+names(prev_regions) <- c("author", "region", "prev_bi", "prev_mf", "n_bi",  
+                         "n_mf", "e_bi", "e_mf")
+prev_regions <- prev_regions %>% 
+  mutate(across(c(prev_bi, prev_mf, n_bi, n_mf, e_bi, e_mf), as.numeric))
+
+prev_bi <- sum(prev_regions$e_bi, na.rm = T)/sum(prev_regions$n_bi, na.rm = T)
+prev_mf <- sum(prev_regions$e_mf, na.rm = T)/sum(prev_regions$n_mf, na.rm = T)
+
+prev_regions$exp_bi <- prev_bi * prev_regions$n_bi
+prev_regions$exp_mf <- prev_mf * prev_regions$n_mf
+prev_regions$expected_bi <- prev_regions$n_bi/sum(prev_regions$n_bi, na.rm = T) #proporcion para chi-sq
+prev_regions$expected_mf <- prev_regions$n_mf/sum(prev_regions$n_mf, na.rm = T)
+
+# https://www.rpubs.com/jchanmu/863867 # H0 is like we expect | H1 we don't expect this distribution  
+chi_bi <- chisq.test(x=prev_regions$e_bi, p=prev_regions$expected_bi, correct = FALSE) # < 0.05 Si H1
+chi_mf <- chisq.test(x=prev_regions$e_mf, p=prev_regions$expected_mf, correct = FALSE)
+
+america_tb <- create_region_tb(americ_prev, am_prev)
+asia_tb <- create_region_tb(asia_prev, as_prev)
+europe_tb <- create_region_tb(euro_prev, eu_prev)
+others_tb <- create_region_tb(others_prev, ot_prev)
+na_row <- c(rep(' ',4))
+global <- c("GLOBAL DATA: ", NA, paste0(sum(prev_regions$e_bi), "/", sum(prev_regions$n_bi), 
+                                    " (", round(prev_bi*100,2), ") [IC95%: ", 
+                                    round((prev_bi - (2*sqrt(prev_bi)))*100,2), " - ",
+                                    round((prev_bi + (2*sqrt(prev_bi)))*100,2), "; Chi-square: ", 
+                                    paste0(chi_bi$statistic),
+                                    "; p-value ",
+                                    ifelse(round(chi_bi$p.value,3) <0.01, paste0("< 0.01]"), 
+                                           round(chi_bi$p.value,3))), 
+            paste0(sum(prev_regions$e_mf), "/", sum(prev_regions$n_mf), 
+                                    " (", round(prev_mf*100,2), ") [IC95%:", 
+                                    round((prev_mf - (2*sqrt(prev_mf)))*100,2), " - ",
+                                    round((prev_mf + (2*sqrt(prev_mf)))*100,2), "; Chi-square: ", 
+                                    paste0(chi_mf$statistic),
+                                    "; p-value ",
+                                    ifelse(round(chi_mf$p.value,3) <0.01, paste0("< 0.01]"), 
+                                           round(chi_mf$p.value,3)))
+)
+
+prev_final <- rbind(america_tb, na_row, asia_tb, na_row, europe_tb, na_row, others_tb, na_row, 
+                    global, na_row)
+
+prev_final <- prev_final %>%
+  mutate(across(where(is.character), ~replace(., .== 'NA/NA (NA)', " ")))
+
+rows_bold <- c(1,nrow(america_tb),2+nrow(america_tb), 1+nrow(america_tb)+nrow(asia_tb),
+               3+nrow(america_tb)+nrow(asia_tb), 
+               2+nrow(america_tb)+nrow(asia_tb)+nrow(europe_tb),
+               4+nrow(america_tb)+nrow(asia_tb)+nrow(europe_tb),
+               7+nrow(america_tb)+nrow(asia_tb)+nrow(europe_tb),
+               5+nrow(america_tb)+nrow(asia_tb)+nrow(europe_tb)+nrow(others_tb))
+
+
+prev_final %>%
+  gt() %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(rows = rows_bold)  # Fila 1
+  )
+
+
+```
+(*) At global data we report n/N (%) [IC95, Chi-square, p-value]
+
+
+```{r analysis ma , echo=FALSE, include=FALSE}
+ma_bc_or <- or(db_bc)
+tt_bc <- table_or(analysis = ma_bc_or, nstudies =nrow(db_bc),
+                    int = db_bc$int[1], comp = db_bc$comp[1],
+                    outcome = db_bc$outc[1]) 
+
+
+ma_dml5_or <- or(db_dml5)
+tt_dml5 <- table_or(analysis = ma_dml5_or, nstudies =nrow(db_dml5),
+                    int = db_dml5$int[1], comp = db_dml5$comp[1],
+                    outcome = db_dml5$outc[1]) 
+
+ma_dmu5_or <- or(db_dmu5)
+tt_dmu5 <- table_or(analysis = ma_dmu5_or, nstudies =nrow(db_dmu5),
+                    int = db_dmu5$int[1], comp = db_dmu5$comp[1],
+                    outcome = db_dmu5$outc[1]) 
+
+
+ma_srl5_or <- or(db_srl5)
+tt_srl5 <- table_or(analysis = ma_srl5_or, nstudies =nrow(db_srl5),
+                    int = db_srl5$int[1], comp = db_srl5$comp[1],
+                    outcome = db_srl5$outc[1]) 
+
+ma_sru5_or <- or(db_sru5)
+tt_sru5 <- table_or(analysis = ma_sru5_or, nstudies =nrow(db_sru5),
+                    int = db_sru5$int[1], comp = db_sru5$comp[1],
+                    outcome = db_sru5$outc[1]) 
+
+
+ma_mt_rr <- rr(db_mt)
+tt_mt <- table_rr(analysis = ma_mt_rr, nstudies =nrow(db_mt),
+                    int = db_mt$int[1], comp = db_mt$comp[1],
+                    outcome = db_mt$outc[1]) 
+
+```
+**Meta-analysis**
+We performed a meta-analyses using the `metafor` and `forestplot` packages. We computed effect sizes comparing unifocal versus multifocal medullary thyroid cancer across several clinical outcomes: distant metastasis, structural recurrence, biochemical cure, and mortality. Analyses were divided considering our data that were marked in two parts of time (less and upper or equal than 5 years). 
+
+Random effects models were implemented using the `metafor` package, with heterogeneity addressed through Restricted Maximum Likelihood (REML) estimation. Effect sizes were calculated as relative risk (RR) for mortality and odds ratios (OR) for structural recurrence, biochemical cure, and distant metastasis using the escalc function. All outcomes incorporated Knapp-Hartung adjustments for 95% confidence intervals. Heterogeneity was quantified using Tau² and I² statistics.
+
+<details>
+<br>
+<summary><b>Figure A. -</b> Distant metastasis, Structural recurrence, Biochemical cure: Analysis with Odds Ratio (OR) 95%CI </summary></br>
+
+```{r dic100, echo=FALSE, fig.height=10, fig.width=14, message=FALSE, warning=FALSE}
+title_or <- c('', 'Unifocal (n/N)', 'Multifocal (n/N)', 'Odds Ratio (OR) 95%CI', 'Weights')
+sub_dic1 <- c('Distant metastasis', rep(NA, 4))
+sub_dic2 <- c('Structural recurrence', rep(NA, 4))
+sub_dic3 <- c('Biochemical cure', rep(NA, 4))
+sub_dic11 <- c('  ≤ 5 years', rep(NA, 4))
+sub_dic22 <- c('  > 5 years', rep(NA, 4))
+
+subtotal1 <- rbind(title_or, NA,
+                   sub_dic1, 
+                   sub_dic11, tt_dml5$b[4,], NA, 
+                   sub_dic22, tt_dmu5$b[-c(1:3, nrow(tt_dmu5$b)-3),], NA,
+                   sub_dic2,
+                   sub_dic11, tt_srl5$b[-c(1:3, nrow(tt_srl5$b)-3),],
+                   sub_dic22, tt_sru5$b[-c(1:3, nrow(tt_sru5$b)-3),], NA,
+                   sub_dic3, 
+                   sub_dic22, tt_bc$b[4,], NA)
+subtotal1 <- as.matrix(subtotal1)
+
+sub_summary <- c(rep(T,4),
+                 rep(F, nrow(tt_dml5$b)-7), rep(T,2), 
+                 rep(F, nrow(tt_dmu5$b)-7), rep(T,6),
+                 rep(F, nrow(tt_srl5$b)-7), rep(T,4), 
+                 rep(F, nrow(tt_sru5$b)-7), rep(T,6),
+                 rep(F, nrow(tt_bc$b)-7), F)
+
+sizes_dic <- c(rep(NA,4), 
+               0.008*(ma_dml5_or$pre$weights),rep(NA,2),
+               0.015*(ma_dmu5_or$pre$weights),1, rep(NA,5),
+               0.0085*(ma_srl5_or$pre$weights),1, rep(NA,3),
+               0.013*(ma_sru5_or$pre$weights),1, rep(NA,5),
+               0.007*(ma_bc_or$pre$weights),NA)
+
+subtotal1n <- rbind(NA,NA, NA, NA, 
+                    tt_dml5$c[4,], NA, NA,
+                    tt_dmu5$c[-c(1:3, nrow(tt_dmu5$c)-3),],NA,NA,NA,
+                    tt_srl5$c[-c(1:3, nrow(tt_srl5$c)-3),],NA,
+                    tt_sru5$c[-c(1:3, nrow(tt_sru5$c)-3),],NA,NA,NA,
+                    tt_bc$c[4,], NA)
+
+xticks = c(0.02,0.12,1,6.5,25)
+limit_x = c(0.02,25)
+grids = c(0.02,0.12,6.5,25)
+
+plot_dic1 <- plot_dicho(format_table_graph = subtotal1, sizes_box = sizes_dic,
+                       subtotal1_summary = sub_summary,
+                        limits = subtotal1n, xticks = xticks,limit_x = limit_x, 
+                        grids = grids, xlog = TRUE)
+plot_dic1
+
+
+```
+</details>
+
+
+
+<details>
+<br>
+<summary><b>Figure B. -</b> Mortality: Analysis with Relative Risk (RR) 95%CI </summary></br>
+```{r dic200, echo=FALSE, fig.height=2.5, fig.width=11.1, message=FALSE, warning=FALSE}
+title_or <- c('Mortality', 'Unifocal (n/N)', 'Multifocal (n/N)', 'Relative Risk (RR) 95%CI', 'Weights')
+sub_dic22 <- c('  > 5 years', rep(NA, 4))
+
+subtotal1 <- rbind(title_or, NA, sub_dic22, tt_mt$b[4,], NA)
+subtotal1 <- as.matrix(subtotal1)
+
+sub_summary <- c(rep(T,3),
+                 rep(F, nrow(tt_mt$b)-7), F)
+
+sizes_dic <- c(rep(NA,3), 
+               0.0065*(ma_mt_rr$pre$weights),NA)
+
+subtotal1n <- rbind(NA,NA, NA, tt_mt$c[4,], NA)
+
+xticks = c(0.02,0.12,1,6.5,25)
+limit_x = c(0.02,25)
+grids = c(0.02,0.12,6.5,25)
+
+plot_dic2 <- plot_dicho(format_table_graph = subtotal1, sizes_box = sizes_dic,
+                       subtotal1_summary = sub_summary,
+                        limits = subtotal1n, xticks = xticks,limit_x = limit_x, 
+                        grids = grids, xlog = TRUE)
+plot_dic2
+
+
+```
+</details>

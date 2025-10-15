@@ -28,24 +28,25 @@ distribution of prevalence rates. We calculate Chi-squeared test in its
 p-value using `chisq.test`. The Chi-squared test results led to
 rejection of the null hypothesis in favor of the alternative hypothesis,
 indicating that observed prevalence distributions differed significantly
-from expected patterns for both bifocality (10.39% \[95% CI: -54.07 to
-74.84; p \< 0.01\]) and multifocal medullary thyroid cancer (18.4% \[95%
-CI: -67.39 to 104.18; p \< 0.01\]).
+from expected patterns for both bifocality (9.76% \[IC95%: -52.73 -
+72.26; Chi-square: 53.9271781082519; p-value \< 0.01\]) and multifocal
+medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
+0.01\]).
 
-<div id="niwhzurrcq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#niwhzurrcq table {
+<div id="dvypfnvxxp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dvypfnvxxp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-&#10;#niwhzurrcq thead, #niwhzurrcq tbody, #niwhzurrcq tfoot, #niwhzurrcq tr, #niwhzurrcq td, #niwhzurrcq th {
+&#10;#dvypfnvxxp thead, #dvypfnvxxp tbody, #dvypfnvxxp tfoot, #dvypfnvxxp tr, #dvypfnvxxp td, #dvypfnvxxp th {
   border-style: none;
 }
-&#10;#niwhzurrcq p {
+&#10;#dvypfnvxxp p {
   margin: 0;
   padding: 0;
 }
-&#10;#niwhzurrcq .gt_table {
+&#10;#dvypfnvxxp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -70,11 +71,11 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
-&#10;#niwhzurrcq .gt_caption {
+&#10;#dvypfnvxxp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-&#10;#niwhzurrcq .gt_title {
+&#10;#dvypfnvxxp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -85,7 +86,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
-&#10;#niwhzurrcq .gt_subtitle {
+&#10;#dvypfnvxxp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -96,7 +97,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
-&#10;#niwhzurrcq .gt_heading {
+&#10;#dvypfnvxxp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -107,12 +108,12 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#niwhzurrcq .gt_bottom_border {
+&#10;#dvypfnvxxp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#niwhzurrcq .gt_col_headings {
+&#10;#dvypfnvxxp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -126,7 +127,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#niwhzurrcq .gt_col_heading {
+&#10;#dvypfnvxxp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -145,7 +146,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   padding-right: 5px;
   overflow-x: hidden;
 }
-&#10;#niwhzurrcq .gt_column_spanner_outer {
+&#10;#dvypfnvxxp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -156,13 +157,13 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   padding-left: 4px;
   padding-right: 4px;
 }
-&#10;#niwhzurrcq .gt_column_spanner_outer:first-child {
+&#10;#dvypfnvxxp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
-&#10;#niwhzurrcq .gt_column_spanner_outer:last-child {
+&#10;#dvypfnvxxp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
-&#10;#niwhzurrcq .gt_column_spanner {
+&#10;#dvypfnvxxp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -173,10 +174,10 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   display: inline-block;
   width: 100%;
 }
-&#10;#niwhzurrcq .gt_spanner_row {
+&#10;#dvypfnvxxp .gt_spanner_row {
   border-bottom-style: hidden;
 }
-&#10;#niwhzurrcq .gt_group_heading {
+&#10;#dvypfnvxxp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -201,7 +202,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   vertical-align: middle;
   text-align: left;
 }
-&#10;#niwhzurrcq .gt_empty_group_heading {
+&#10;#dvypfnvxxp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -215,13 +216,13 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
-&#10;#niwhzurrcq .gt_from_md > :first-child {
+&#10;#dvypfnvxxp .gt_from_md > :first-child {
   margin-top: 0;
 }
-&#10;#niwhzurrcq .gt_from_md > :last-child {
+&#10;#dvypfnvxxp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
-&#10;#niwhzurrcq .gt_row {
+&#10;#dvypfnvxxp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -239,7 +240,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   vertical-align: middle;
   overflow-x: hidden;
 }
-&#10;#niwhzurrcq .gt_stub {
+&#10;#dvypfnvxxp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -251,7 +252,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#niwhzurrcq .gt_stub_row_group {
+&#10;#dvypfnvxxp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -264,13 +265,13 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   padding-right: 5px;
   vertical-align: top;
 }
-&#10;#niwhzurrcq .gt_row_group_first td {
+&#10;#dvypfnvxxp .gt_row_group_first td {
   border-top-width: 2px;
 }
-&#10;#niwhzurrcq .gt_row_group_first th {
+&#10;#dvypfnvxxp .gt_row_group_first th {
   border-top-width: 2px;
 }
-&#10;#niwhzurrcq .gt_summary_row {
+&#10;#dvypfnvxxp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -279,14 +280,14 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#niwhzurrcq .gt_first_summary_row {
+&#10;#dvypfnvxxp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
-&#10;#niwhzurrcq .gt_first_summary_row.thick {
+&#10;#dvypfnvxxp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
-&#10;#niwhzurrcq .gt_last_summary_row {
+&#10;#dvypfnvxxp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -295,7 +296,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#niwhzurrcq .gt_grand_summary_row {
+&#10;#dvypfnvxxp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -304,7 +305,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#niwhzurrcq .gt_first_grand_summary_row {
+&#10;#dvypfnvxxp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -313,7 +314,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   border-top-width: 6px;
   border-top-color: #D3D3D3;
 }
-&#10;#niwhzurrcq .gt_last_grand_summary_row_top {
+&#10;#dvypfnvxxp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -322,10 +323,10 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   border-bottom-width: 6px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#niwhzurrcq .gt_striped {
+&#10;#dvypfnvxxp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
-&#10;#niwhzurrcq .gt_table_body {
+&#10;#dvypfnvxxp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -333,7 +334,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#niwhzurrcq .gt_footnotes {
+&#10;#dvypfnvxxp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -346,7 +347,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#niwhzurrcq .gt_footnote {
+&#10;#dvypfnvxxp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -354,7 +355,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#niwhzurrcq .gt_sourcenotes {
+&#10;#dvypfnvxxp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -367,64 +368,64 @@ CI: -67.39 to 104.18; p \< 0.01\]).
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#niwhzurrcq .gt_sourcenote {
+&#10;#dvypfnvxxp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#niwhzurrcq .gt_left {
+&#10;#dvypfnvxxp .gt_left {
   text-align: left;
 }
-&#10;#niwhzurrcq .gt_center {
+&#10;#dvypfnvxxp .gt_center {
   text-align: center;
 }
-&#10;#niwhzurrcq .gt_right {
+&#10;#dvypfnvxxp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-&#10;#niwhzurrcq .gt_font_normal {
+&#10;#dvypfnvxxp .gt_font_normal {
   font-weight: normal;
 }
-&#10;#niwhzurrcq .gt_font_bold {
+&#10;#dvypfnvxxp .gt_font_bold {
   font-weight: bold;
 }
-&#10;#niwhzurrcq .gt_font_italic {
+&#10;#dvypfnvxxp .gt_font_italic {
   font-style: italic;
 }
-&#10;#niwhzurrcq .gt_super {
+&#10;#dvypfnvxxp .gt_super {
   font-size: 65%;
 }
-&#10;#niwhzurrcq .gt_footnote_marks {
+&#10;#dvypfnvxxp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
-&#10;#niwhzurrcq .gt_asterisk {
+&#10;#dvypfnvxxp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
-&#10;#niwhzurrcq .gt_indent_1 {
+&#10;#dvypfnvxxp .gt_indent_1 {
   text-indent: 5px;
 }
-&#10;#niwhzurrcq .gt_indent_2 {
+&#10;#dvypfnvxxp .gt_indent_2 {
   text-indent: 10px;
 }
-&#10;#niwhzurrcq .gt_indent_3 {
+&#10;#dvypfnvxxp .gt_indent_3 {
   text-indent: 15px;
 }
-&#10;#niwhzurrcq .gt_indent_4 {
+&#10;#dvypfnvxxp .gt_indent_4 {
   text-indent: 20px;
 }
-&#10;#niwhzurrcq .gt_indent_5 {
+&#10;#dvypfnvxxp .gt_indent_5 {
   text-indent: 25px;
 }
-&#10;#niwhzurrcq .katex-display {
+&#10;#dvypfnvxxp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
-&#10;#niwhzurrcq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+&#10;#dvypfnvxxp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -444,7 +445,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
 <td headers="Multifocality general n/N (%)*" class="gt_row gt_left" style="font-weight: bold;"> </td></tr>
     <tr><td headers="Location" class="gt_row gt_left">USA</td>
 <td headers="Author" class="gt_row gt_left">Mao, 2024</td>
-<td headers="Bilaterality n/N (%)*" class="gt_row gt_left">27/79 (34.18)</td>
+<td headers="Bilaterality n/N (%)*" class="gt_row gt_left">13/79 (16.46)</td>
 <td headers="Multifocality general n/N (%)*" class="gt_row gt_left"> </td></tr>
     <tr><td headers="Location" class="gt_row gt_left">USA</td>
 <td headers="Author" class="gt_row gt_left">Kotwal, 2021</td>
@@ -472,7 +473,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
 <td headers="Multifocality general n/N (%)*" class="gt_row gt_left">1/18 (5.56)</td></tr>
     <tr><td headers="Location" class="gt_row gt_left" style="font-weight: bold;">Statisticals by region: </td>
 <td headers="Author" class="gt_row gt_left" style="font-weight: bold;"> </td>
-<td headers="Bilaterality n/N (%)*" class="gt_row gt_left" style="font-weight: bold;">85/354 (24)</td>
+<td headers="Bilaterality n/N (%)*" class="gt_row gt_left" style="font-weight: bold;">71/354 (20)</td>
 <td headers="Multifocality general n/N (%)*" class="gt_row gt_left" style="font-weight: bold;">98/460 (21)</td></tr>
     <tr><td headers="Location" class="gt_row gt_left"> </td>
 <td headers="Author" class="gt_row gt_left"> </td>
@@ -628,7 +629,7 @@ CI: -67.39 to 104.18; p \< 0.01\]).
 <td headers="Multifocality general n/N (%)*" class="gt_row gt_left"> </td></tr>
     <tr><td headers="Location" class="gt_row gt_left" style="font-weight: bold;">GLOBAL DATA: </td>
 <td headers="Author" class="gt_row gt_left" style="font-weight: bold;">NA</td>
-<td headers="Bilaterality n/N (%)*" class="gt_row gt_left" style="font-weight: bold;">234/2253 (10.39) [IC95%: -54.07 - 74.84; Chi-square: 82.9395025239105; p-value &lt; 0.01]</td>
+<td headers="Bilaterality n/N (%)*" class="gt_row gt_left" style="font-weight: bold;">220/2253 (9.76) [IC95%: -52.73 - 72.26; Chi-square: 53.9271781082519; p-value &lt; 0.01]</td>
 <td headers="Multifocality general n/N (%)*" class="gt_row gt_left" style="font-weight: bold;">696/3783 (18.4) [IC95%:-67.39 - 104.18; Chi-square: 34.8730250595659; p-value &lt; 0.01]</td></tr>
     <tr><td headers="Location" class="gt_row gt_left"> </td>
 <td headers="Author" class="gt_row gt_left"> </td>

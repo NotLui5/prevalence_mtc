@@ -19,6 +19,7 @@ library(rmarkdown)
 library(forestplot)
 library(openxlsx)
 library(gt)
+library(webshot2)
 knitr::opts_chunk$set(fig.path = "Figures/", dev='svg')
 ```
 
@@ -329,7 +330,7 @@ db_srl5 <- filter(db_sr, follow != "> 5 years")
 **Prevalence analyisis by region**
 We conducted prevalence analyses using the `stats` package in R. Prevalence rates were calculated for all studies included in our systematic review. Regional distributions across world regions (Americas, Asia, Europe, and others) were assessed using Chi-squared tests for given probabilities (chisq.test) without correction.
 
-We formulated null and alternative hypotheses regarding the expected distribution of prevalence rates. We calculate Chi-squeared test in its p-value using `chisq.test`. The Chi-squared test results led to rejection of the null hypothesis in favor of the alternative hypothesis, indicating that observed prevalence distributions differed significantly from expected patterns for both bifocality  (9.76% [IC95%: -52.73 - 72.26; Chi-square: 53.9271781082519; p-value < 0.01]) and multifocal medullary thyroid cancer (18.4% [95% CI: -67.39 to 104.18; p < 0.01]).
+We formulated null and alternative hypotheses regarding the expected distribution of prevalence rates. We calculate Chi-squeared test in its p-value using `chisq.test`. The Chi-squared test results led to rejection of the null hypothesis in favor of the alternative hypothesis, indicating that observed prevalence distributions differed significantly from expected patterns for both bifocality  (9.76% [IC95%: -52.73 - 72.26; Chi-square: 53.9271781082519; p-value < 0.01]) and multifocal medullary thyroid cancer (18.36% [IC95%:-67.33 - 104.05; Chi-square: 34.2441525706824; p-value < 0.01]).
 
 ```{r prevalence, echo=FALSE, fig.height=8.6, fig.width=17.1, message=FALSE, warning=FALSE}
 ## Prevalence + IC 95% 
@@ -430,7 +431,8 @@ table_prev <- prev_final %>%
     locations = cells_body(rows = rows_bold)  # Fila 1
   )
 
-table_prev 
+table_prev
+
 ```
 (*) At global data we report n/N (%) [IC95, Chi-square, p-value]
 

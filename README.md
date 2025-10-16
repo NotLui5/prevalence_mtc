@@ -30,23 +30,23 @@ rejection of the null hypothesis in favor of the alternative hypothesis,
 indicating that observed prevalence distributions differed significantly
 from expected patterns for both bifocality (9.76% \[IC95%: -52.73 -
 72.26; Chi-square: 53.9271781082519; p-value \< 0.01\]) and multifocal
-medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
-0.01\]).
+medullary thyroid cancer (18.36% \[IC95%:-67.33 - 104.05; Chi-square:
+34.2441525706824; p-value \< 0.01\]).
 
-<div id="dvypfnvxxp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dvypfnvxxp table {
+<div id="loijfglgim" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#loijfglgim table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-&#10;#dvypfnvxxp thead, #dvypfnvxxp tbody, #dvypfnvxxp tfoot, #dvypfnvxxp tr, #dvypfnvxxp td, #dvypfnvxxp th {
+&#10;#loijfglgim thead, #loijfglgim tbody, #loijfglgim tfoot, #loijfglgim tr, #loijfglgim td, #loijfglgim th {
   border-style: none;
 }
-&#10;#dvypfnvxxp p {
+&#10;#loijfglgim p {
   margin: 0;
   padding: 0;
 }
-&#10;#dvypfnvxxp .gt_table {
+&#10;#loijfglgim .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -71,11 +71,11 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
-&#10;#dvypfnvxxp .gt_caption {
+&#10;#loijfglgim .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-&#10;#dvypfnvxxp .gt_title {
+&#10;#loijfglgim .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -86,7 +86,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
-&#10;#dvypfnvxxp .gt_subtitle {
+&#10;#loijfglgim .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -97,7 +97,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
-&#10;#dvypfnvxxp .gt_heading {
+&#10;#loijfglgim .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -108,12 +108,12 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#dvypfnvxxp .gt_bottom_border {
+&#10;#loijfglgim .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#dvypfnvxxp .gt_col_headings {
+&#10;#loijfglgim .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -127,7 +127,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#dvypfnvxxp .gt_col_heading {
+&#10;#loijfglgim .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -146,7 +146,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   padding-right: 5px;
   overflow-x: hidden;
 }
-&#10;#dvypfnvxxp .gt_column_spanner_outer {
+&#10;#loijfglgim .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -157,13 +157,13 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   padding-left: 4px;
   padding-right: 4px;
 }
-&#10;#dvypfnvxxp .gt_column_spanner_outer:first-child {
+&#10;#loijfglgim .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
-&#10;#dvypfnvxxp .gt_column_spanner_outer:last-child {
+&#10;#loijfglgim .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
-&#10;#dvypfnvxxp .gt_column_spanner {
+&#10;#loijfglgim .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -174,10 +174,10 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   display: inline-block;
   width: 100%;
 }
-&#10;#dvypfnvxxp .gt_spanner_row {
+&#10;#loijfglgim .gt_spanner_row {
   border-bottom-style: hidden;
 }
-&#10;#dvypfnvxxp .gt_group_heading {
+&#10;#loijfglgim .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -202,7 +202,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   vertical-align: middle;
   text-align: left;
 }
-&#10;#dvypfnvxxp .gt_empty_group_heading {
+&#10;#loijfglgim .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -216,13 +216,13 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
-&#10;#dvypfnvxxp .gt_from_md > :first-child {
+&#10;#loijfglgim .gt_from_md > :first-child {
   margin-top: 0;
 }
-&#10;#dvypfnvxxp .gt_from_md > :last-child {
+&#10;#loijfglgim .gt_from_md > :last-child {
   margin-bottom: 0;
 }
-&#10;#dvypfnvxxp .gt_row {
+&#10;#loijfglgim .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -240,7 +240,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   vertical-align: middle;
   overflow-x: hidden;
 }
-&#10;#dvypfnvxxp .gt_stub {
+&#10;#loijfglgim .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -252,7 +252,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#dvypfnvxxp .gt_stub_row_group {
+&#10;#loijfglgim .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -265,13 +265,13 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   padding-right: 5px;
   vertical-align: top;
 }
-&#10;#dvypfnvxxp .gt_row_group_first td {
+&#10;#loijfglgim .gt_row_group_first td {
   border-top-width: 2px;
 }
-&#10;#dvypfnvxxp .gt_row_group_first th {
+&#10;#loijfglgim .gt_row_group_first th {
   border-top-width: 2px;
 }
-&#10;#dvypfnvxxp .gt_summary_row {
+&#10;#loijfglgim .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -280,14 +280,14 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#dvypfnvxxp .gt_first_summary_row {
+&#10;#loijfglgim .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
-&#10;#dvypfnvxxp .gt_first_summary_row.thick {
+&#10;#loijfglgim .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
-&#10;#dvypfnvxxp .gt_last_summary_row {
+&#10;#loijfglgim .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -296,7 +296,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#dvypfnvxxp .gt_grand_summary_row {
+&#10;#loijfglgim .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -305,7 +305,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#dvypfnvxxp .gt_first_grand_summary_row {
+&#10;#loijfglgim .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -314,7 +314,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   border-top-width: 6px;
   border-top-color: #D3D3D3;
 }
-&#10;#dvypfnvxxp .gt_last_grand_summary_row_top {
+&#10;#loijfglgim .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -323,10 +323,10 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   border-bottom-width: 6px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#dvypfnvxxp .gt_striped {
+&#10;#loijfglgim .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
-&#10;#dvypfnvxxp .gt_table_body {
+&#10;#loijfglgim .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -334,7 +334,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#dvypfnvxxp .gt_footnotes {
+&#10;#loijfglgim .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -347,7 +347,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#dvypfnvxxp .gt_footnote {
+&#10;#loijfglgim .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -355,7 +355,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#dvypfnvxxp .gt_sourcenotes {
+&#10;#loijfglgim .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -368,64 +368,64 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#dvypfnvxxp .gt_sourcenote {
+&#10;#loijfglgim .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#dvypfnvxxp .gt_left {
+&#10;#loijfglgim .gt_left {
   text-align: left;
 }
-&#10;#dvypfnvxxp .gt_center {
+&#10;#loijfglgim .gt_center {
   text-align: center;
 }
-&#10;#dvypfnvxxp .gt_right {
+&#10;#loijfglgim .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-&#10;#dvypfnvxxp .gt_font_normal {
+&#10;#loijfglgim .gt_font_normal {
   font-weight: normal;
 }
-&#10;#dvypfnvxxp .gt_font_bold {
+&#10;#loijfglgim .gt_font_bold {
   font-weight: bold;
 }
-&#10;#dvypfnvxxp .gt_font_italic {
+&#10;#loijfglgim .gt_font_italic {
   font-style: italic;
 }
-&#10;#dvypfnvxxp .gt_super {
+&#10;#loijfglgim .gt_super {
   font-size: 65%;
 }
-&#10;#dvypfnvxxp .gt_footnote_marks {
+&#10;#loijfglgim .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
-&#10;#dvypfnvxxp .gt_asterisk {
+&#10;#loijfglgim .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
-&#10;#dvypfnvxxp .gt_indent_1 {
+&#10;#loijfglgim .gt_indent_1 {
   text-indent: 5px;
 }
-&#10;#dvypfnvxxp .gt_indent_2 {
+&#10;#loijfglgim .gt_indent_2 {
   text-indent: 10px;
 }
-&#10;#dvypfnvxxp .gt_indent_3 {
+&#10;#loijfglgim .gt_indent_3 {
   text-indent: 15px;
 }
-&#10;#dvypfnvxxp .gt_indent_4 {
+&#10;#loijfglgim .gt_indent_4 {
   text-indent: 20px;
 }
-&#10;#dvypfnvxxp .gt_indent_5 {
+&#10;#loijfglgim .gt_indent_5 {
   text-indent: 25px;
 }
-&#10;#dvypfnvxxp .katex-display {
+&#10;#loijfglgim .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
-&#10;#dvypfnvxxp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+&#10;#loijfglgim div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -446,7 +446,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
     <tr><td headers="Location" class="gt_row gt_left">USA</td>
 <td headers="Author" class="gt_row gt_left">Mao, 2024</td>
 <td headers="Bilaterality n/N (%)*" class="gt_row gt_left">13/79 (16.46)</td>
-<td headers="Multifocality general n/N (%)*" class="gt_row gt_left"> </td></tr>
+<td headers="Multifocality general n/N (%)*" class="gt_row gt_left">13/79 (16.46)</td></tr>
     <tr><td headers="Location" class="gt_row gt_left">USA</td>
 <td headers="Author" class="gt_row gt_left">Kotwal, 2021</td>
 <td headers="Bilaterality n/N (%)*" class="gt_row gt_left">10/102 (9.8)</td>
@@ -474,7 +474,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
     <tr><td headers="Location" class="gt_row gt_left" style="font-weight: bold;">Statisticals by region: </td>
 <td headers="Author" class="gt_row gt_left" style="font-weight: bold;"> </td>
 <td headers="Bilaterality n/N (%)*" class="gt_row gt_left" style="font-weight: bold;">71/354 (20)</td>
-<td headers="Multifocality general n/N (%)*" class="gt_row gt_left" style="font-weight: bold;">98/460 (21)</td></tr>
+<td headers="Multifocality general n/N (%)*" class="gt_row gt_left" style="font-weight: bold;">111/539 (21)</td></tr>
     <tr><td headers="Location" class="gt_row gt_left"> </td>
 <td headers="Author" class="gt_row gt_left"> </td>
 <td headers="Bilaterality n/N (%)*" class="gt_row gt_left"> </td>
@@ -630,7 +630,7 @@ medullary thyroid cancer (18.4% \[95% CI: -67.39 to 104.18; p \<
     <tr><td headers="Location" class="gt_row gt_left" style="font-weight: bold;">GLOBAL DATA: </td>
 <td headers="Author" class="gt_row gt_left" style="font-weight: bold;">NA</td>
 <td headers="Bilaterality n/N (%)*" class="gt_row gt_left" style="font-weight: bold;">220/2253 (9.76) [IC95%: -52.73 - 72.26; Chi-square: 53.9271781082519; p-value &lt; 0.01]</td>
-<td headers="Multifocality general n/N (%)*" class="gt_row gt_left" style="font-weight: bold;">696/3783 (18.4) [IC95%:-67.39 - 104.18; Chi-square: 34.8730250595659; p-value &lt; 0.01]</td></tr>
+<td headers="Multifocality general n/N (%)*" class="gt_row gt_left" style="font-weight: bold;">709/3862 (18.36) [IC95%:-67.33 - 104.05; Chi-square: 34.2441525706824; p-value &lt; 0.01]</td></tr>
     <tr><td headers="Location" class="gt_row gt_left"> </td>
 <td headers="Author" class="gt_row gt_left"> </td>
 <td headers="Bilaterality n/N (%)*" class="gt_row gt_left"> </td>
